@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #61dafb;
+        }
+        .table-container {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .table-header {
+            background-color: #3a3a3a;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .table-header h2 {
+            margin: 0;
+        }
+        .table-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .table-content.active {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        th {
+            background-color: #3a3a3a;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        .hidden {
+            display: none;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #2a2a2a;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal input[type="text"],
+        .modal input[type="email"],
+        .modal input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #3a3a3a;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .modal button {
+            background-color: #61dafb;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal button:hover {
+            background-color: #4fa8d5;
+        }
+        .table-header-actions {
+            display: flex;
+            align-items: center;
+        }
+        .download-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+
+        <div class="table-container">
+            <div class="table-header" onclick="toggleTable('users')">
+                <h2>Users</h2>
+                <div class="table-header-actions">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="select-all-users" onchange="selectAll('users')">
+                        <label for="select-all-users">Select All</label>
+                    </div>
+                    <button class="download-btn" onclick="downloadExcel('users')">Download Excel</button>
+                </div>
+            </div>
+            <div id="users-table" class="table-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td><input type="checkbox" name="user-select" value="{{ loop.index0 }}"></td>
+                            <td>{{ user.Name }}</td>
+                            <td>{{ user.Email }}</td>
+                            <td>
+                                <button onclick="updateUser('{{ loop.index0 }}')">Update</button>
+                                <button onclick="resetPassword('{{ loop.index0 }}')">Reset Password</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header" onclick="toggleTable('email-subs')">
+                <h2>Email Subscriptions</h2>
+                <div class="table-header-actions">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="select-all-email-subs" onchange="selectAll('email-subs')">
+                        <label for="select-all-email-subs">Select All</label>
+                    </div>
+                    <button class="download-btn" onclick="downloadExcel('email_subscriptions')">Download Excel</button>
+                </div>
+            </div>
+            <div id="email-subs-table" class="table-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Email</th>
+                            <th>Timestamp</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sub in email_subs %}
+                        <tr>
+                            <td><input type="checkbox" name="email-sub-select" value="{{ loop.index0 }}"></td>
+                            <td>{{ sub.Value }}</td>
+                            <td>{{ sub.Timestamp }}</td>
+                            <td>
+                                <button onclick="updateSubscription('email_subscriptions', '{{ loop.index0 }}', '{{ sub.Value }}')">Update</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header" onclick="toggleTable('newsletter-subs')">
+                <h2>Newsletter Subscriptions</h2>
+                <div class="table-header-actions">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="select-all-newsletter-subs" onchange="selectAll('newsletter-subs')">
+                        <label for="select-all-newsletter-subs">Select All</label>
+                    </div>
+                    <button class="download-btn" onclick="downloadExcel('newsletter_subscriptions')">Download Excel</button>
+                </div>
+            </div>
+            <div id="newsletter-subs-table" class="table-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Newsletter</th>
+                            <th>Timestamp</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sub in newsletter_subs %}
+                        <tr>
+                            <td><input type="checkbox" name="newsletter-sub-select" value="{{ loop.index0 }}"></td>
+                            <td>{{ sub.Value }}</td>
+                            <td>{{ sub.Timestamp }}</td>
+                            <td>
+                                <button onclick="updateSubscription('newsletter_subscriptions', '{{ loop.index0 }}', '{{ sub.Value }}')">Update</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <button class="delete-btn" onclick="deleteSelected()">Delete Selected</button>
+    </div>
+    <!-- Update User Modal -->
+    <div id="updateUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Update User</h2>
+            <input type="hidden" id="updateUserId">
+            <input type="text" id="updateUserName" placeholder="New Name">
+            <input type="email" id="updateUserEmail" placeholder="New Email">
+            <button onclick="submitUpdateUser()">Update</button>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div id="resetPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Reset Password</h2>
+            <input type="hidden" id="resetPasswordUserId">
+            <input type="password" id="newPassword" placeholder="New Password">
+            <input type="password" id="confirmPassword" placeholder="Confirm New Password">
+            <button onclick="submitResetPassword()">Reset Password</button>
+        </div>
+    </div>
+
+    <div id="updateSubscriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Update Subscription</h2>
+            <input type="hidden" id="updateSubscriptionType">
+            <input type="hidden" id="updateSubscriptionId">
+            <input type="text" id="updateSubscriptionValue" placeholder="New Value">
+            <button onclick="submitUpdateSubscription()">Update</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleTable(tableId) {
+            const table = document.getElementById(`${tableId}-table`);
+            table.classList.toggle('active');
+        }
+
+        function selectAll(tableId) {
+            const checkboxes = document.getElementsByName(`${tableId}-select`);
+            const selectAllCheckbox = document.getElementById(`select-all-${tableId}`);
+            checkboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
+        }
+
+        function updateUser(id) {
+            // Implement update user logic
+            console.log(`Update user with id ${id}`);
+        }
+
+        function resetPassword(id) {
+            // Implement reset password logic
+            console.log(`Reset password for user with id ${id}`);
+        }
+
+        function updateSubscription(type, id) {
+            // Implement update subscription logic
+            console.log(`Update ${type} with id ${id}`);
+        }
+
+        function deleteSelected() {
+            const selectedUsers = Array.from(document.getElementsByName('user-select'))
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+            
+            const selectedEmailSubs = Array.from(document.getElementsByName('email-sub-select'))
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+            
+            const selectedNewsletterSubs = Array.from(document.getElementsByName('newsletter-sub-select'))
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            const data = {
+                users: selectedUsers,
+                email_subscriptions: selectedEmailSubs,
+                newsletter_subscriptions: selectedNewsletterSubs
+            };
+
+            fetch('/admin/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert(result.message);
+                    location.reload(); // Refresh the page to show updated data
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while deleting entries.');
+            });
+        }
+        function updateUser(id) {
+            document.getElementById('updateUserId').value = id;
+            document.getElementById('updateUserModal').style.display = 'block';
+        }
+
+        function resetPassword(id) {
+            document.getElementById('resetPasswordUserId').value = id;
+            document.getElementById('resetPasswordModal').style.display = 'block';
+        }
+
+        function submitUpdateUser() {
+            const id = document.getElementById('updateUserId').value;
+            const newName = document.getElementById('updateUserName').value;
+            const newEmail = document.getElementById('updateUserEmail').value;
+
+            fetch('/admin/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sheet: 'users',
+                    id: id,
+                    new_name: newName,
+                    new_email: newEmail
+                }),
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('User updated successfully');
+                    location.reload();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the user.');
+            });
+
+            document.getElementById('updateUserModal').style.display = 'none';
+        }
+
+        function submitResetPassword() {
+            const id = document.getElementById('resetPasswordUserId').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            fetch('/admin/reset_password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: id,
+                    new_password: newPassword
+                }),
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Password reset successfully');
+                    location.reload();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while resetting the password.');
+            });
+
+            document.getElementById('resetPasswordModal').style.display = 'none';
+        }
+
+        // Close modal when clicking on the close button or outside the modal
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.onclick = function() {
+                this.parentElement.parentElement.style.display = 'none';
+            }
+        });
+        function updateSubscription(type, id, currentValue) {
+            document.getElementById('updateSubscriptionType').value = type;
+            document.getElementById('updateSubscriptionId').value = id;
+            document.getElementById('updateSubscriptionValue').value = currentValue;
+            document.getElementById('updateSubscriptionModal').style.display = 'block';
+        }
+
+        function submitUpdateSubscription() {
+            const type = document.getElementById('updateSubscriptionType').value;
+            const id = document.getElementById('updateSubscriptionId').value;
+            const newValue = document.getElementById('updateSubscriptionValue').value;
+
+            fetch('/admin/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sheet: type,
+                    id: id,
+                    new_value: newValue
+                }),
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Subscription updated successfully');
+                    location.reload();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the subscription.');
+            });
+
+            document.getElementById('updateSubscriptionModal').style.display = 'none';
+        }
+        function downloadExcel(tableType) {
+            let selectedIds;
+            if (tableType === 'users') {
+                selectedIds = Array.from(document.getElementsByName('user-select'))
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+            } else if (tableType === 'email_subscriptions') {
+                selectedIds = Array.from(document.getElementsByName('email-sub-select'))
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+            } else if (tableType === 'newsletter_subscriptions') {
+                selectedIds = Array.from(document.getElementsByName('newsletter-sub-select'))
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+            }
+
+            fetch('/admin/download_excel', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    table_type: tableType,
+                    selected_ids: selectedIds
+                }),
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `${tableType}_export.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while downloading the Excel file.');
+            });
+        }
+    </script>
+</body>
+</html>
