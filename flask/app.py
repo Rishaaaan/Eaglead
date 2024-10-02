@@ -14,8 +14,11 @@ def home():
 
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
+    print(True)
     email = request.form.get('email')
+    print(email)
     newsletter = request.form.get('newsletter')
+    print(newsletter)
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     if email:

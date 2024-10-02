@@ -2,79 +2,763 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscribe</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #2c2c2c;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background-color: #3c3c3c;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        input[type="email"],
-        input[type="text"] {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #555;
-            border-radius: 4px;
-            background-color: #2c2c2c;
-            color: #ffffff;
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #4CAF50;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <title>Technology consulting</title>
+     <link rel="icon" href="/static/rncos_new.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+     <script
+      src="https://kit.fontawesome.com/7433d3320f.js"
+      crossorigin="anonymous"
+    ></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Subscribe</h1>
-        <form action="{{ url_for('subscribe') }}" method="post">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="newsletter">Newsletter:</label>
-                <input type="text" id="newsletter" name="newsletter">
-            </div>
-            <button type="submit">Subscribe</button>
-        </form>
+<body class="custom-bg-black">
+<style>
+  html {
+    scroll-behavior: smooth;   /* for smooth href scrolling */
+  }
+.custom-bg-black {
+    background-color: black; /* Sets the background color to black */
+}
+.custom-bg-orange {
+    background-color: #ff5c00; /* Sets the background color to black */
+}
+.custom-border-orange-select{
+    border-bottom:4px solid #ff5c00;  /* Sets the background color to black */
+}
+.custom-border-orange:hover {
+    border-bottom:4px solid #ff5c00;  /* Sets the background color to black */
+}
+.custom-border-orange-first:hover{
+    border-top:4px solid #ff5c00;  /* Sets the background color to black */
+}
+.custom-border-collapse-orange {
+    border-bottom:4px solid #ff5c00;  /* Sets the background color to black */
+}
+</style>
+<nav class="custom-bg-black dark:custom-bg-black fixed w-full z-30 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="/static/rncos_new.png" class="h-8" alt="Flowbite Logo">
+      <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">TECH-X</span>
+  </a>
+  <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+    <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1">
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+      </svg>
+      <span class="sr-only">Search</span>
+    </button>
+    <div class="relative hidden md:block">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+        <span class="sr-only">Search icon</span>
+      </div>
+      <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-white border border-white rounded-lg custom-bg-black placeholder-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
     </div>
+    <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+      <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+  </div>
+  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+    <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg custom-bg-black md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:custom-bg-black dark:custom-bg-black md:dark:custom-bg-black dark:border-gray-900">
+      <li>
+        <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ff5c00] md:p-0 md:dark:hover:text-[#ff5c00] dark:text-white dark:hover:bg-gray-700 dark:hover:text-[#ff5c00] md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="#why" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ff5c00] md:p-0 md:dark:hover:text-[#ff5c00] dark:text-white dark:hover:bg-gray-700 dark:hover:text-[#ff5c00] md:dark:hover:bg-transparent dark:border-gray-700">Why</a>
+      </li>
+        <li>
+        <a href="#products" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ff5c00] md:p-0 md:dark:hover:text-[#ff5c00] dark:text-white dark:hover:bg-gray-700 dark:hover:text-[#ff5c00] md:dark:hover:bg-transparent dark:border-gray-700">Products</a>
+      </li>
+      <li>
+        <a href="#services" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ff5c00] md:p-0 md:dark:hover:text-[#ff5c00] dark:text-white dark:hover:bg-gray-700 dark:hover:text-[#ff5c00] md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+      </li>
+      <li>
+        <a href="#contact" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ff5c00] md:p-0 md:dark:hover:text-[#ff5c00] dark:text-white dark:hover:bg-gray-700 dark:hover:text-[#ff5c00] md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+      </li>
+        <li>
+        <a href="#blogs" class="block py-2 px-3 text-[#ff5c00] rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ff5c00] md:p-0 md:dark:hover:text-[#ff5c00] dark:text-white  dark:hover:text-[#ff5c00] md:dark:hover:bg-transparent dark:border-gray-700">Tailored Insights</a>
+      </li>
+    </ul>
+  </div>
+  </div>
+</nav>
+<br>
+<br>
+<section class="custom-bg-black dark:custom-bg-black">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        <br>
+        <br>
+        <br>
+        <h1 class="mb-4 text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-6xl dark:text-white">Unlock the ease, efficiency and control you deserve with intelligent automation</h1>
+        <br>
+        <br>
+        <br>
+        <p class="mb-2 text-2xl font-serif italic text-white lg:text-2xl leading-normal text-left  dark:text-white">Achieve greater control and efficiency in your processes through intelligent automation.</p>
+        <p class="mb-8 text-2xl font-serif italic text-white lg:text-2xl leading-normal text-left  dark:text-white">Implement tailored systems that align with your goals and elevate your business performance.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h3 class="mb-12 text-3xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl lg:text-4xl dark:text-white" id="why">Why intelligent automation matters</h3>
+        <div class="text-center md:max-w-screen-md lg:max-w-screen-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-8 mt-8 text-gray-500">
+                <a href="#" class=" p-0 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400 p-3">
+                  <h4 class="text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-6xl lg:text-6xl dark:text-white ">3x</h4>
+                     <hr class="w-12  h-1  custom-bg-orange border-0 md:my-7 dark:custom-bg-orange">
+    <p class="text-xl font-normal text-left whitespace-preline tracking-normal  text-white md:text-xl lg:text-xl dark:text-white ">
+    the productivity increases when businesses implement intelligent automation in key processes
+</p>
+  </a>
+<a href="#" class=" p-0 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400 p-3">
+                      <h4 class="text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-6xl lg:text-6xl dark:text-white ">65%</h4>
+         <hr class="w-14  h-1  custom-bg-orange border-0 md:my-7 dark:custom-bg-orange mb-0">
+    <p class="text-xl font-normal  text-left tracking-normal leading-normal text-white md:text-xl lg:text-xl dark:text-white ">
+    of organizations are investing in intelligent automation to improve operational efficiency rather than just reducing headcount
+</p>
+  </a>
+                <a href="#" class=" p-0 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400 p-3">
+                  <h4 class="text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-6xl lg:text-6xl dark:text-white ">54%</h4>
+                    <hr class="w-14  h-1  custom-bg-orange border-0 md:my-7 dark:custom-bg-orange mb-0">
+    <p class="text-xl font-normal text-left tracking-normal leading-normal text-white md:text-xl lg:text-xl dark:text-white ">
+    of CIOs are prioritizing intelligent automation as a core part of their digital transformation strategy in 2024
+</p>
+  </a>
+                <a href="#" class=" p-0 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400 p-3">
+                  <h4 class="text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-6xl lg:text-6xl dark:text-white ">68%</h4>
+                     <hr class="w-14  h-1  custom-bg-orange border-0 md:my-7 dark:custom-bg-orange">
+    <p class="text-xl font-normal text-left tracking-normal leading-normal text-white md:text-xl lg:text-xl dark:text-white ">
+    of businesses report faster decision-making and execution after integrating intelligent automation systems
+</p>
+  </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--flush accordion for FAQs-->
+<br>
+<div id="accordion-flush" data-accordion="collapse" data-active-classes="custom-bg-black dark:bg-gray-900 text-white dark:text-white custom-border-collapse-orange" data-inactive-classes="text-gray-500 dark:text-gray-400">
+    <h2 class="mb-4 ml-12 mr-0 text-3xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl lg:text-5xl dark:text-white">What you can do</h2>
+    <br>
+    <br>
+    <br>
+    <h2 id="accordion-flush-heading-1">
+    <button type="button" class="flex items-center justify-between text-2xl w-11/12 mx-auto py-5 font-medium rtl:text-right text-gray-500 border-b-4 border-gray-200 dark:border-gray-700   dark:text-gray-400  hover:text-white  border-t-4 border-gray-100 custom-border-orange-first  gap-3 custom-border-orange" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+      <span>Cut down on repetitive tasks, get more done</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+    <div class="py-5 border-b border-gray-200 dark:border-gray-700 w-11/12 mx-auto custom-border-orange-select">
+      <p class="mb-2 text-white dark:text-white text-xl">Automate the routine work so your team can focus on what really matters—growing your business.</p>
+    </div>
+  </div>
+  <h2 id="accordion-flush-heading-2">
+    <button type="button" class="flex items-center justify-between w-11/12 text-2xl mx-auto py-5 font-medium rtl:text-right text-gray-500 border-b-4 border-gray-200 dark:border-gray-700   dark:text-gray-400  hover:text-white custom-border-orange  gap-3" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+      <span>Improve operations without spending a fortune</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+    <div class="py-5 border-b border-gray-200 dark:border-gray-700 w-11/12 mx-auto custom-border-orange-select">
+      <p class="mb-2 text-white dark:text-white text-xl">Use smart automation to make your processes smoother and save costs, helping your business do more without extra expenses.</p>
+    </div>
+  </div>
+    <h2 id="accordion-flush-heading-3">
+    <button type="button" class="flex items-center justify-between w-11/12 text-2xl mx-auto py-5 font-medium rtl:text-right text-gray-500 border-b-4 border-gray-200 dark:border-gray-700   dark:text-gray-400  hover:text-white custom-border-orange  gap-3" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-2">
+      <span>Make work easier for your team</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+    <div class="py-5 border-b border-gray-200 dark:border-gray-700 w-11/12 mx-auto custom-border-orange-select">
+      <p class="mb-2 text-white dark:text-white text-xl">Give your employees tools that simplify their tasks and help them make better decisions, leading to higher productivity.</p>
+    </div>
+  </div>
+    <h2 id="accordion-flush-heading-4">
+    <button type="button" class="flex items-center justify-between w-11/12 text-2xl mx-auto py-5 font-medium rtl:text-right text-gray-500 border-b-4 border-gray-200 dark:border-gray-700   dark:text-gray-400  hover:text-white custom-border-orange  gap-3" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-2">
+      <span>Grow your business without extra hassle</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
+    <div class="py-5 border-b border-gray-200 dark:border-gray-700 w-11/12 mx-auto custom-border-orange-select">
+      <p class="mb-2 text-white dark:text-white text-xl">Let automation help your business expand smoothly, without the need for big investments or complicated changes.</p>
+    </div>
+  </div>
+  <h2 id="accordion-flush-heading-5">
+    <button type="button" class="flex items-center justify-between w-11/12 mx-auto py-5 text-2xl font-medium rtl:text-right text-gray-500 border-b-4 border-gray-200 dark:border-gray-700   dark:text-gray-400  hover:text-white custom-border-orange  gap-3" data-accordion-target="#accordion-flush-body-5" aria-expanded="false" aria-controls="accordion-flush-body-3"> <!--border-b-thickness for adding border at the bottom-->
+      <span>Spend wisely, get better results</span>
+      <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+      </svg>
+    </button>
+  </h2>
+  <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-5">
+    <div class="py-5 border-b border-gray-200 dark:border-gray-700 w-11/12 mx-auto custom-border-orange-select">
+      <p class="mb-2 text-white dark:text-white text-xl">Invest in automation that boosts efficiency and profits, making sure every rupee counts.</p>
+
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--latest blogs section-->
+<h3 class="mb-12 ml-8 text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-5xl dark:text-white" id="blogs">What’s trending in technology strategy</h3>
+<br>
+<style>
+    .hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.blogcustom-div {
+  width: 300px;
+  padding: 194px;
+  height: 450px;
+  margin: 0px;
+
+}
+/* Optional: Absolute position for the image to fill the div */
+    .blogcustom-div:hover img {
+      opacity: 0;
+       transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+     /* Hidden text (initially off-screen) */
+        .blogcard-text {
+        word-spacing: -0.05em;
+            position: absolute;
+            top: 120px; /* Below the main text */
+            right: 70%;
+            transform: translate(100%, 0%) ; /* Start off-screen to the right */
+            opacity: 0; /* Invisible initially */
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        /* Hidden text (initially off-screen) */
+        .blogood-text {
+            position: absolute;
+            bottom: 17px; /* Below the main text */
+            right: 10%;
+            opacity: 0; /* Invisible initially */
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+
+        /* When hovering on the box */
+        .blogcustom-div:hover .blogcard-text {
+             top: 120px; /* Below the main text */
+             right:70%;
+            transform: translate(72%, 0); /* Slide in to normal position */
+            opacity: 1; /* Fade in the hidden text */
+            color:white;
+            position: absolute;
+        }
+     .blogcustom-div:hover .blogood-text {
+             bottom: 17px; /* Below the main text */
+            transform: translate(75%, 0); /* Slide in to normal position */
+            opacity: 1; /* Fade in the hidden text */
+            color:white;
+            position: absolute;
+
+        }
+</style>
+<br>
+ <div class="w-full overflow-x-auto hide-scroll-bar scroll-padding pl-80 w-full">
+  <div class="flex inline gap-0 justify-center">
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-blue-500 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/blog1.jpg"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+    <h3 class="absolute top-0 left-0 mt-4 ml-3 text-2xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl  lg:text-4xl dark:text-white p-0 z-20 ">Strategic Network Expansion</h3>
+  <div class="blogcard-text  w-11/12 font-serif text-md text-justify tracking-tight ">Targeted outreach will enhance your network and driving growth through strategic partnerships and collaborations.</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-red-500 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/blog1.jpg"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:7239896399625011201?utm_source=share&utm_medium=member_desktop" class="absolute top-0 left-0 mt-4 ml-3 p-4 text-lg font-semibold text-left tracking-tighter leading-normal text-white md:text-2xl  lg:text-2xl dark:text-white  z-20 ">Smell the Future: How AI is Bringing Scents to Life</a>
+  <div class="blogcard-text p-5 w-11/12 text-sm text-justify tracking-tighter ">Over 100 years ago, Alexander Graham Bell envisioned a science to measure smell. Today, AI is making that vision a reality by helping computers recognize and interpret scents.</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-yellow-800 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/blog2.jpg"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+<a href="https://www.linkedin.com/posts/tanish-shushmul-maheshwari-3aa17_soon-well-see-ai-creating-all-our-linkedin-activity-7235181084118806529-ExAK?utm_source=share&utm_medium=member_desktop" class="absolute top-0 left-0 mt-4 ml-3 text-lg font-semibold text-left tracking-tighter leading-normal text-white md:text-2xl  lg:text-2xl dark:text-white p-4 z-20 ">Soon we'll see AI creating all our LinkedIn content</a>
+  <div class="blogcard-text  w-11/12 p-4 text-sm text-justify tracking-tighter ">57% of people won’t care who the creator is,
+Recently shared poll shows this.
+Can AI truly capture your brand's voice, or is human creativity irreplaceable?</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-slate-400 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/aimodelclothes.png"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+<a href="https://www.linkedin.com/pulse/wearing-clothes-without-actually-them-tanish-shushmul-maheshwari-dlwtc/?trackingId=oEdtYt%2BHVT%2FY%2F6Tazhe%2FnA%3D%3D" class="absolute top-0 left-0 mt-4 ml-3 text-lg font-semibold text-left tracking-tighter leading-normal text-white md:text-2xl  lg:text-2xl dark:text-white p-4 z-20 ">Wearing Clothes Without Actually Wearing Them?</a>
+  <div class="blogcard-text  w-11/12 p-4 mr-1 text-sm text-justify tracking-tighter ">We’ve all been there. You order a piece of clothing online, excited to receive it, only for it to arrive in the wrong size, with a fabric that doesn’t feel right, or in a color that looks nothing like what you saw on the website. The frustration of returning items, calling customer care, and waiting for replacements or refunds can make online shopping more hassle than it's worth.</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-yellow-400 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/blog3.jpg"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+<h3 class="absolute top-0 left-0 mt-4 ml-3 text-lg font-semibold text-left tracking-tighter leading-normal text-white md:text-2xl  lg:text-2xl dark:text-white p-4 z-20 ">Fear of Discovering Something New … One More Job Gone?</h3>
+    <div class="blogcard-text  w-4/5 mt-10 text-sm text-justify tracking-tighter ">
+        Imagine you’re in a meeting, and you’ve created a post for August 15th. You ask your boss, "When’s the best time to post this?" The boss says, "4 PM should be fine." But when the post goes live, engagement is low. Maybe the "Boss is Always Right" mantra didn’t hold up this time! 😅
+        <br>
+        <br>
+        <p>To tackle this, I found <b>Hootsuite</b>, which suggests the best times to post based on trends and your post history.</p>
+    </div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-slate-500 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/comingsoon.jpeg"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+<a href="https://www.linkedin.com/posts/tanish-shushmul-maheshwari-3aa17_fear-of-discovering-something-new-one-more-activity-7232695496174092288-AiCM?utm_source=share&utm_medium=member_desktop" class="absolute top-0 left-0 mt-4 ml-3 text-lg font-semibold text-left tracking-tighter leading-normal text-white md:text-2xl  lg:text-2xl dark:text-white p-4 z-20 ">Coming Soon</a>
+    <div class="blogcard-text  w-11/12 p-4 text-sm text-justify tracking-tight "><p class="text-2xl inline">w</p>e'll be back with some more stories to inspire future leaders who do what needs to be done.&nbsp;Subscribe our <p class="text-red-500 inline italic">newsletter</p> and be the first to know all the latest tech innovations globally</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+
+ </div>
+      </div>
+
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- our experience section -->
+
+<div class="inline-flex items-center justify-center w-full">
+    <hr class="w-11/12 h-px  mt-10 my-8 bg-white border-0">
+    <h3 class="absolute px-3 font-normal leading-normal  text-white -translate-x-1/2 custom-bg-black left-1/2 dark:text-white text-4xl">Our Experience</h3>
+</div>
+<br>
+<br>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-8 w-11/12 mx-auto my-auto text-center">
+                <section>
+                    <div class="text-5xl font-semibold text-center tracking-wide leading-normal text-white md:text-7xl lg:text-7xl dark:text-white">
+                        1,000+
+                        <hr class="w-56  h-1 mx-auto  my-auto custom-bg-orange border-0 md:my-7 dark:custom-bg-orange">
+                    </div>
+
+
+<p class="mt-10 text-xl font-normal text-center tracking-tight leading-normal text-white md:text-xl lg:text-xl dark:text-white">Hours dedicated to building cutting-edge automation solutions for SMEs</p>
+            </section>
+                <section>
+                    <div class="text-5xl font-semibold text-center tracking-wide leading-normal text-white md:text-7xl lg:text-7xl dark:text-white">
+                        50+
+                        <hr class="w-32  h-1  mx-auto  my-auto custom-bg-orange border-0 md:my-7 dark:custom-bg-orange">
+                    </div>
+
+
+<p class="mt-10  text-xl font-normal text-center tracking-tight leading-normal text-white md:text-xl lg:text-xl dark:text-white">Strategic partnerships formed with industry experts and technology innovators</p>
+            </section>
+            </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2 class="mb-4 ml-12 mr-0 text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-6xl dark:text-white" id="products">Take the first step</h2>
+    <br>
+    <br>
+    <br>
+
+ <div class="w-full overflow-x-auto hide-scroll-bar scroll-padding   w-full">
+  <div class="flex inline gap-4 justify-center">
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-slate-800 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/10xmartech.jpeg"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+    <h3 class="absolute top-5 left-20 mt-4 ml-5  text-2xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl  lg:text-4xl dark:text-white p-0 z-20 ">10x MarTech</h3>
+  <div class="blogcard-text  w-11/12 text-sm px-4 text-justify tracking-tighter font-bold ">Leverage generative AI to craft compelling content and automate your social media management. Streamline your digital presence and unlock new avenues for growth and engagement.</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-slate-800 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/tech_manufacturers.png"  class= "absolute top-0 left-0 w-full h-full  " alt="Pizza" />
+<h3 class="absolute top-5 left-20 mt-4 ml-10 text-2xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl  lg:text-4xl dark:text-white p-0 z-20 ">&nbsp;EAGLEAD</h3>
+  <div class="blogcard-text  w-11/12  text-sm text-justify px-4 tracking-tighter font-bold">Discover key industry players and expand your network effortlessly. Leverage our B2B entity finder to pinpoint manufacturers, exporters, importers, and distributors by city, complete with detailed company profiles and contact information.</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+<div class="relative blogcustom-div group overflow-hidden hover:bg-gradient-to-b hover:from-slate-800 hover:to-purple-300 transition ease-in-out duration-700 text-white font-bold text-center transition ease-in-out delay-150 duration-700 hover:-translate-y-2 hover:scale-110 hover:bg-indigo-500">
+    <img src="/static/dispatch.jpeg"  class= "absolute top-0 left-0 w-full h-full object-cover  " alt="Pizza" />
+<h3 class="absolute top-5 left-10 mt-4 ml-7 text-2xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl  lg:text-4xl dark:text-white  p-0 z-20 ">Dispatch DynamiX</h3>
+  <div class="blogcard-text  w-11/12 px-4 text-sm text-justify tracking-tighter font-bold ">Efficiently handle order processing, inventory, and fulfillment. Integrate seamlessly with existing platforms, and leverage insights for improved operations and customer satisfaction.</div>
+  <svg class=" blogood-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+ </div>
+      </div>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+
+<!--promo filler-->
+
+<div class="relative  box  group mx-auto my-auto h-72 w-11/12  bg-transparent bg-gradient-to-r from-blue-400 to-neutral-950 overflow-hidden pl-6">
+    <img src="/static/Pattern.png" class="absolute top-0 right-0 h-72 object-cover transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform duration-300" />
+    <div class="inline-flex">
+  <h3 class="mt-7 text-xl font-semibold text-left tracking-tighter leading-normal text-white md:text-3xl lg:text-2xl dark:text-white">We invest in the world’s potential</h3>
+    <svg class="w-8 h-11 mt-6 text-white dark:text-white transform group-hover:translate-x-2 transition-transform duration-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+      </div>
+  </div>
+<br>
+<br>
+<br>
+<!--how we can help-->
+
+<style>
+.hide-scroll-bar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+.custom-div {
+  background-color: black;
+  width: 300px;
+  border: 1px solid white;
+  padding: 194px;
+  height: 450px;
+  margin: 20px;
+}
+     /* Hidden text (initially off-screen) */
+        .card-text {
+            position: absolute;
+            top: 120px; /* Below the main text */
+            right: 70%;
+            transform: translate(100%, 0%) ; /* Start off-screen to the right */
+            opacity: 0; /* Invisible initially */
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        /* Hidden text (initially off-screen) */
+        .good-text {
+            position: absolute;
+            bottom: 17px; /* Below the main text */
+            right: 8%;
+            opacity: 0; /* Invisible initially */
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+
+        /* When hovering on the box */
+        .custom-div:hover .card-text {
+             top: 120px; /* Below the main text */
+             right:70%;
+            transform: translate(72%, 0); /* Slide in to normal position */
+            opacity: 1; /* Fade in the hidden text */
+            color:white;
+            position: absolute;
+        }
+     .custom-div:hover .good-text {
+             bottom: 17px; /* Below the main text */
+            transform: translate(75%, 0); /* Slide in to normal position */
+            opacity: 1; /* Fade in the hidden text */
+            color:white;
+            position: absolute;
+
+        }
+</style>
+<h2 class="mb-4 ml-7 mr-0 text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-6xl dark:text-white" id="services">How we can help</h2>
+<br>
+<br>
+  <div class="flex inline  overflow-x-auto gap-0 hide-scroll-bar justify-center pl-20">
+<div class="relative custom-div group">
+  <h3 class="absolute top-0 left-2 mt-4 ml-3 text-2xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl  lg:text-4xl dark:text-white p-0">Operational Efficiency</h3>
+  <div class="card-text w-11/12  font-serif text-md text-left  p-0 tracking-tighter  ">
+      Automate routine tasks and streamline processes will boost productivity and reduce operational costs. Our intelligent solutions improve efficiency and free up resources for strategic initiatives.</div>
+  <svg class=" good-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+    <div class="relative custom-div group">
+  <h3 class="absolute top-0 left-2 mt-4 ml-3 text-2xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl  lg:text-4xl dark:text-white p-0">Strategic Network Expansion</h3>
+  <div class="card-text  w-11/12 font-serif text-md  text-justify tracking-tight  ">Targeted outreach will enhance your network and driving growth through strategic partnerships and collaborations.</div>
+  <svg class=" good-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+    <div class="relative custom-div group">
+  <h3 class="absolute top-0 left-2 mt-4 ml-3 text-2xl font-semibold text-left tracking-tighter leading-normal text-white md:text-4xl  lg:text-4xl dark:text-white p-0">Data-driven growth</h3>
+  <div class="card-text  w-11/12 font-serif text-md text-justify tracking-tight  ">Actionable data insights and predictive analytics will help you make informed business decisions and drive strategic growth.</div>
+  <svg class=" good-text text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+</div>
+</div>
+<br>
+<br>
+<br>
+<!--india is changing promo filler -2-->
+
+<div class="relative  box  group mx-auto my-auto h-72 w-11/12  bg-transparent bg-gradient-to-r from-red-600 to-neutral-950 overflow-hidden pl-6">
+    <img src="/static/Pattern.png" class="absolute top-0 right-0 h-72 object-cover transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform duration-300" />
+    <div class="inline-flex">
+  <h3 class="mt-7 text-xl font-semibold text-left tracking-tighter leading-normal text-white md:text-3xl lg:text-2xl dark:text-white">We invest in the world’s potential</h3>
+    <svg class="w-8 h-11 mt-6 text-white dark:text-white transform group-hover:translate-x-2 transition-transform duration-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+</svg>
+      </div>
+  </div>
+<br>
+<br>
+<br>
+<br>
+
+
+<!--connect with us-->
+<style>
+  .custom-bg-black {
+    background-color: black; /* Sets the background color to black */
+}
+
+.main{
+margin: 0;
+padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.profile-card {
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  background: #fff;
+  color: #333;
+  margin-left: 21%;
+}
+.cover-pic {
+  display: block;
+  width: 100%;
+  height: 130px;
+  padding: 0px;
+}
+.profile-pic {
+  width: 100px;
+  margin-top: -60px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0px #1a4fd0;
+  transition: box-shadow 0.5s;
+}
+.profile-pic:hover {
+  box-shadow: 0 0 0 5px #1a4fd0;
+}
+.profile-card h1 {
+  font-weight: 600;
+  font-size: 25px;
+}
+.profile-card p {
+  line-height: 2;
+  font-size: 15px;
+}
+.connect-btn {
+  display: inline-block;
+  text-decoration: none;
+  background: #1a4fd0;
+  color: #fff;
+  padding: 6px 35px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.message-btn {
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid rgb(98, 94, 94);
+  color: rgb(98, 94, 94);
+  padding: 6px 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.message-icon {
+  margin-right: 8px;
+}
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+.row h2 {
+  font-weight: 500;
+  font-size: 25px;
+}
+.view-btn {
+  display: inline-block;
+  text-decoration: none;
+  background: #1a4fd0;
+  color: #fff;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 10px;
+  transition: all 0.5s ease-in-out;
+}
+.view-btn:hover {
+  background: #092b83;
+}
+.view-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+</style>
+<br>
+<div class="box border-2 border-white  mx-auto my-auto pb-5 mb-10 w-11/12   custom-bg-black " id="contact">
+    <br>
+<form action="{{ url_for('subscribe') }}" method="post">
+<div class="grid grid-cols-2 sm:grid-cols-2 gap-8 mt-4 w-11/12 mx-auto my-auto pr-10">
+    <section>
+    <br>
+                    <h3 class="mb-12  text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-5xl dark:text-white">Let's chat your next big <p class="text-[#FF5733] inline">idea !</p></h3>  <!--this [color-code] you can change the  custom color code-->
+                  <p class="mb-2 text-white dark:text-white text-left text-lg">We work with ambitious leaders who want to define the future, not hide from it. Together, we achieve extraordinary outcomes.</p>
+                  <br>
+                   <br>                   
+                  <input type="text" id="email" name="email" class=" mb-2 custom-bg-black border-2 border-gray-200 text-white focus:ring-blue-500 focus:border-white block w-11/12  p-2.5 text-white focus:ring-white text-xl" placeholder="your email" required />
+
+</section>
+    <section>
+    <!-- Profile Card  -->
+<div class=" main">
+      <div class="profile-card border-2 border-white">
+        <img src="/static/cover.jpg" class="cover-pic" />
+        <img src="/static/tech_website_image.jpeg" class="profile-pic mx-auto" />
+
+        <!-- Heading Text  -->
+        <h1>Tanish  Shushmul  Maheshwari</h1>
+        <p>Helping businesses increase ROI through automations</p>
+
+        <!-- Button Section  -->
+        <a href="https://www.linkedin.com/in/tanish-shushmul-maheshwari-3aa17/" class="connect-btn">Connect</a>
+        <a href="https://www.linkedin.com/in/tanish-shushmul-maheshwari-3aa17/" class="message-btn"><i class="fa-solid fa-lock message-icon"></i>Message</a>
+
+        <!-- Second Section  -->
+        <div class="row">
+          <div>
+            <p>Followers</p>
+            <h2>8,810</h2>
+          </div>
+          <div>
+            <p>Connections</p>
+            <h2>500+</h2>
+          </div>
+        </div>
+        <a
+          href="https://www.linkedin.com/in/tanish-shushmul-maheshwari-3aa17/"
+          target="_blank"
+          class="view-btn"
+          ><i class="fab fa-linkedin view-icon"></i>VIEW PROFILE</a
+        >
+      </div>
+    </div>
+</section>
+</div>
+    <br>
+    </div>
+<br>
+<br>
+<br>
+<!--footer-->
+<style>
+.custom-footer-div{
+width:40%
+}
+</style>
+<footer>
+<div class="relative box   mx-auto my-auto pb-5 mb-10 w-full  custom-bg-black ">
+    <br>
+<div class="grid grid-cols-2 sm:grid-cols-2 gap-8 mt-4 w-11/12 mx-auto my-auto pr-10">
+    <section>
+                    <h3 class="mb-12 ml-0  text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-5xl dark:text-white">Stay ahead of the competiton</h3>  <!--this [color-code] you can change the  custom color code-->
+                  <p class="mb-2 text-white dark:text-white text-left text-lg">We work with ambitious leaders who want to define the future, not hide from it. Together, we achieve extraordinary outcomes.</p>
+
+
+</section>
+    <section>
+       <div class="absolute bottom-12  inline flex custom-footer-div right-12">
+      <input type="text" id="newsletter" name="newsletter" class="relative custom-bg-black border-2 border-gray-200 text-white focus:ring-blue-500 w-11/12 focus:border-white block  p-2.5 text-white focus:ring-white text-xl" placeholder="your email" required />
+      <button type="submit" class=" relative  focus:outline-none  h-21 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-normal text-md tracking-tighter  px-3 py-3  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">SUBSCRIBE</button>
+       </div>
+    </section>
+</form>
+</div>
+    <br>
+    </div>
+    <br>
+<hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+      <div class="m-3 mb-2 sm:flex sm:items-center sm:justify-between">
+          <span class="text-sm text-gray-400 sm:text-center dark:text-gray-800">© 2024 <a href="https://flowbite.com/" class="hover:underline">RNCOS</a>. All Rights Reserved.
+          </span>
+          <div class="flex mt-4 sm:justify-center sm:mt-0">
+              <a href="https://www.facebook.com/rncosconsulting/" class="text-gray-500 hover:text-gray-800 dark:hover:text-white">
+                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
+                        <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
+                    </svg>
+                  <span class="sr-only">Facebook page</span>
+              </a>
+              <a href="https://www.linkedin.com/company/rncos-e-services-pvt-ltd/" class="text-gray-500 hover:text-gray-800 dark:hover:text-white ms-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0" aria-hidden="true"  fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                      <path fill-rule="evenodd" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="sr-only">Linkedin page</span>
+              </a>
+
+          </div>
+      </div>
+  <br>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 </html>
