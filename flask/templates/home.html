@@ -665,10 +665,14 @@ padding: 0;
                     <h3 class="mb-12  text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-5xl dark:text-white">Let's chat your next big <p class="text-[#FF5733] inline">idea !</p></h3>  <!--this [color-code] you can change the  custom color code-->
                   <p class="mb-2 text-white dark:text-white text-left text-lg">We work with ambitious leaders who want to define the future, not hide from it. Together, we achieve extraordinary outcomes.</p>
                   <br>
-                   <br>                   
-                  <input type="text" id="email" name="email" class=" mb-2 custom-bg-black border-2 border-gray-200 text-white focus:ring-blue-500 focus:border-white block w-11/12  p-2.5 text-white focus:ring-white text-xl" placeholder="your email" required />
-
+                   <br>
+                   <div class="flex items-center w-full mb-2">
+                    <input type="text" id="email" name="email" class="custom-bg-black border-2 border-gray-200 text-white focus:ring-blue-500 focus:border-white block w-full p-2.5 text-white focus:ring-white text-xl" placeholder="your email" required />
+                    <button type="submit" class="ml-2 h-21 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-normal text-md tracking-tighter px-3 py-3 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">SUBSCRIBE</button>
+                   </div>
+                 
 </section>
+</form>
     <section>
     <!-- Profile Card  -->
 <div class=" main">
@@ -724,7 +728,7 @@ width:40%
                     <h3 class="mb-12 ml-0  text-4xl font-semibold text-left tracking-tighter leading-normal text-white md:text-5xl lg:text-5xl dark:text-white">Stay ahead of the competiton</h3>  <!--this [color-code] you can change the  custom color code-->
                   <p class="mb-2 text-white dark:text-white text-left text-lg">We work with ambitious leaders who want to define the future, not hide from it. Together, we achieve extraordinary outcomes.</p>
 
-
+<form action="{{ url_for('subscribe') }}" method="post">
 </section>
     <section>
        <div class="absolute bottom-12  inline flex custom-footer-div right-12">
